@@ -15,7 +15,7 @@ class Config {
 
 	private static function file(): array {
 		$path = __DIR__ . '/../../../..';
-		$file = $path . '/heymehedi-utils-config.php';
+		$file = $path . '/hm-utils-config.php';
 
 		if ( file_exists( $file ) ) {
 			return require_once $file;
@@ -26,7 +26,7 @@ class Config {
 
 	private static function default( string $key ): string {
 		$arr = [
-			'project_key' => 'heymehedi_utils',
+			'project_key' => 'hm_utils',
 			'key_prefix'  => '_',
 			'key_suffix'  => '_',
 		];
