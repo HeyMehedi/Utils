@@ -9,19 +9,25 @@ namespace HeyMehedi\Utils;
 
 class Config {
 
+	private static array $file_data = [];
+
 	public static function get( string $key ): string {
-		return self::file()[$key] ?? self::default( $key );
+		if ( ! self::$file_data ) {
+			self::file();
+		}
+
+		return self::$file_data[$key] ?? self::default( $key );
 	}
 
-	private static function file(): array {
+	private static function file(): void {
 		$path = __DIR__ . '/../../../..';
 		$file = $path . '/dynamic-utils.config.php';
 
-		if ( file_exists( $file ) ) {
-			return require_once $file;
+		if ( ! file_exists( $file ) ) {
+			return;
 		}
 
-		return [];
+		self::$file_data = require_once $file;
 	}
 
 	private static function default( string $key ): string {
